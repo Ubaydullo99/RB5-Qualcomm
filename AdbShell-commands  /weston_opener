@@ -1,1 +1,17 @@
+# PC CMD adb shell:
+
+
+
+export SNPE_TARGET_ARCH=aarch64-ubuntu-gcc7.5
+
+# when this command is run, env. variable SNPE_TARGET_ARCH will be set to aarch64-ubuntu-gcc7.5, it will be accessible to any subsequent commands or processes that are executed in same shell session. 
+
+# export - used in Unix system linux, to create, modify environment variables, environment variables store values that can be used by programs to determine certain settings 
+# SNPE_TARGET_ARCH - name environment variable being created or modified, it is set to aarch64-ubuntu-gcc7.5
+# aarch64-ubuntu-gcc7.5 - value being assigned to env. variable, it is taget arch. specification commonly used in context of developing software for ARM-based processors running ubuntu linux and compiled with GCC 7.5
+
+
+
+
+
 
