@@ -1,23 +1,26 @@
 # PC CMD adb shell:
-
-
+./start_weston.sh
 
 export SNPE_TARGET_ARCH=aarch64-ubuntu-gcc7.5
-
-# when this command is run, env. variable SNPE_TARGET_ARCH will be set to aarch64-ubuntu-gcc7.5; it will be accessible to any subsequent commands or processes executed in the same shell session. 
+# when this command is run, the env variable SNPE_TARGET_ARCH will be set to aarch64-ubuntu-gcc7.5; it will be accessible to any subsequent commands or processes executed in the same shell session. 
 
 # export - used in Unix system Linux to create and modify environment variables, environment variables store values that can be used by programs to determine specific settings 
 # SNPE_TARGET_ARCH - name environment variable created or modified, set to aarch64-ubuntu-gcc7.5.
-# aarch64-ubuntu-gcc7.5 - value being assigned to env. variable, it is target arch. specification commonly used in the context of developing software for ARM-based processors running Ubuntu Linux and compiled with GCC 7.5
-
-
+# aarch64-ubuntu-gcc7.5 - value being assigned to env. Variable, it is target arch. specification commonly used in the context of developing software for ARM-based processors running Ubuntu Linux and compiled with GCC 7.5
 
 export LD_LIBRARY_PATH=/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib
-
-# env. Variable LD_LIBRARY_PATH will be set to /data/local/tmp/snpeexample/aarch64-ubuntu-gcc7.5/lib. This tells the operating system to search for shared libraries in the specific directory when executing programs. it is useful when custom shared libraries or dependencies must be loaded during program execution.  
+# env. Variable LD_LIBRARY_PATH will be set to /data/local/tmp/snpeexample/aarch64-ubuntu-gcc7.5/lib. This tells the operating system to search for shared libraries in the specific directory when executing programs. It is useful when custom shared libraries or dependencies must be loaded during program execution.  
 
 # LD_LIBRARY_PATH - env variable that specifies search path for shared libraries. 
 # /data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/lib - value being assigned to LD_LIBRARY_PATH env variable, /data/local/tmp/snpeexample/ - path to directory snpeexample - it is project directory. 
-## $SNPE_TARGET_ARCH - variable substitution, means the value of SNPE_TARGET_ARCH environment variable , value of $SNPE_TARGET_ARCH will be expanded to aarch64-ubuntu-gcc7.5, resulting in the full path /data/local/tmp/snpeexample/aarch64-ubuntu-gcc7.5/lib
-## lib directory typically contains these shared libraries when LD_LIBRARY_PATH environment variable is set to a directory path, the operating system searches for shared libraries in that directory when executing programs. It allows the programs to find and link to the required shared libraries during runtime.
+## $SNPE_TARGET_ARCH - variable substitution means the value of SNPE_TARGET_ARCH environment variable , value of $SNPE_TARGET_ARCH will be expanded to aarch64-ubuntu-gcc7.5, resulting in the full path /data/local/tmp/snpeexample/aarch64-ubuntu-gcc7.5/lib
+## lib directory typically contains these shared libraries when LD_LIBRARY_PATH environment variable is set to a directory path, the operating system searches for shared libraries in that directory when executing programs. The programs can find and link to the required shared libraries during runtime.
+
+export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
+# path environment variable is modified to include the specified directory (/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin). It allows the shell to search for executable files in that directory when you enter a command. Adding a directory to the path enables the shell to find and execute programs in that directory without specifying the full path.   
+
+# Path - the name of the env variable being created or modified. The path variable is a particular env variable that specified directories the shell could search for executable files. 
+# $PATH - var substitution, it means the current value of the path environment variable. By using it, we are appending a new directory to the existing value of the PATH
+#:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin - it is the value being assigned to the PATH env variable, 
+##: color is a delimiter used in the PATH variable to separate multiple directory paths.
 
