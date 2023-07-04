@@ -50,6 +50,7 @@ mkdir -p $XDG_RUNTIME_DIR
 
 chmod 0700 $XDG_RUNTIME_DIR
 # When you run this command, it changes the permissions of the directory specified by the value of XDG_RUNTIME_DIR to 0700. The owner of the directory will have read, write, and execute permissions, while the group and others will have no permissions.
+## The chmod command helps manage access control to files and directories. In this case, setting the permissions to 0700 ensures that only the owner of the directory has full access, while restricting access for other users and groups. It provides a higher level of security by limiting the directory's visibility and modification rights to the owner only.
 
 # chmod - is a command in Unix-based systems used to change the permissions of files and directories.
 # 0700 -  This is the permission mode specified for the directory. In Unix-based systems, permissions are represented by a three-digit number.
