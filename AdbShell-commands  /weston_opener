@@ -40,4 +40,12 @@ export XDG_RUNTIME_DIR="/usr/bin/weston_socket"
 ## /usr/bin/weston_socket: This is the directory or socket file path being assigned to XDG_RUNTIME_DIR. It assumes that the /usr/bin/weston_socket directory or socket file is the designated location for runtime files and sockets.
 
 
+mkdir -p $XDG_RUNTIME_DIR
+# When you run this command, it creates the directory specified by the value of XDG_RUNTIME_DIR. If the directory already exists, the command does nothing. The -p option ensures that any necessary parent directories leading up to the target directory are created as well.
+
+# mkdir - command to create directories or folders in file system
+# -p - is option or flag used with mkdir commands, it stands for parents and ensures that all parent directories leading up to target directory are also created. if they do not exist. This option allows you to create nested directories in a single command without having to create each parent directory separately.
+# $XDG_RUNTIME_DIR: This is a variable substitution. It refers to the value of the XDG_RUNTIME_DIR environment variable that was set previously. By using $XDG_RUNTIME_DIR in this command, we are referencing the directory path specified by the XDG_RUNTIME_DIR variable.
+
+
 
