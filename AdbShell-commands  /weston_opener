@@ -27,7 +27,7 @@ export PATH=$PATH:/data/local/tmp/snpeexample/$SNPE_TARGET_ARCH/bin
 ##: color is a delimiter used in the PATH variable to separate multiple directory paths.
 
 export ADSP_LIBRARY_PATH="/data/local/tmp/snpeexample/dsp/lib;/system/lib/rfsa/adsp;/system/vendor/lib/rfsa/adsp;/dsp"
-# this variable can be used by programs or scripts to determine the directories where ADSP libraries or related filed are located. It allows programs to locate and load the necessary ADSP libraries when executed. 
+# programs or scripts can use this variable to determine the directories where ADSP libraries or related filed are located. It allows programs to locate and load the necessary ADSP libraries when executed. 
 
 # /data/local/tmp/snpeexample/dsp/lib;/system/lib/rfsa/adsp;/system/vendor/lib/rfsa/adsp;/dsp - it is the value assigned to the  ADSP_LIBRARY_PATH environment variable. It represents a list of directory paths separated by semicolons (;). it is assuming all four directories contain ADSP (Audio Digital Signal Processor) libraries or related files. In reality the last directory contains files. 
 
@@ -59,3 +59,12 @@ chmod 0700 $XDG_RUNTIME_DIR
 ## The second and third digits (7 and 0) represent the permission settings for the owner and group, respectively.
 ## The number 7 in octal translates to 111 in binary, which corresponds to read (r), write (w), and execute (x) permissions.
 ## The number 0 in octal translates to 000 in binary, corresponding to no permissions.
+
+/usr/bin/weston --tty=1 --connector=29 &
+# When you run this command, it starts the Weston compositor with the specified options. Weston will be launched on TTY 1, utilizing the specified connector (number 29). The & symbol at the end of the command allows the Weston process to run in the background, freeing up the shell for further commands.
+## Weston provides a Wayland compositor responsible for managing and displaying graphical applications that use the Wayland display protocol. It creates the graphical environment for Wayland clients, manages windows, handles input events, and performs other compositor-related tasks.
+
+# /usr/bin/weston: This command is executed. It refers to the executable file named "weston" located in the /usr/bin directory. Weston is a reference implementation of a Wayland compositor.
+# --tty=1: This is a command-line option or flag provided to the weston command. It specifies the TTY (terminal) to be used. In this case, it sets the TTY to number 1. TTY 1 typically represents the first virtual console, which is often used for graphical user interfaces.
+# --connector=29: This is another command-line option for the weston command. It specifies the connector to be used. In this case, it sets the connector to number 29. A connector represents a display output on a graphics card, such as an HDMI or DisplayPort port.
+# &: This is a shell symbol known as the "ampersand" or "background operator". It is used to run the command in the background, allowing the shell to continue executing subsequent commands without waiting for the current command to complete.
