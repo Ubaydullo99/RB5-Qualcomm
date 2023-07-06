@@ -32,6 +32,9 @@ export ADSP_LIBRARY_PATH="/data/local/tmp/snpeexample/dsp/lib;/system/lib/rfsa/a
 # /data/local/tmp/snpeexample/dsp/lib;/system/lib/rfsa/adsp;/system/vendor/lib/rfsa/adsp;/dsp - it is the value assigned to the  ADSP_LIBRARY_PATH environment variable. It represents a list of directory paths separated by semicolons (;). it is assuming all four directories contain ADSP (Audio Digital Signal Processor) libraries or related files. In reality the last directory contains files. 
 
 
+
+
+
 export XDG_RUNTIME_DIR="/usr/bin/weston_socket"
 # When you run this command, the XDG_RUNTIME_DIR environment variable is created or modified with the specified value (/usr/bin/weston_socket). This variable informs applications and processes that adhere to the XDG Base Directory specification about the location where runtime files and sockets should be placed.
 
