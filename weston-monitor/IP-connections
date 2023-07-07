@@ -1,0 +1,14 @@
+Private IP connection and public IP connection refer to two different types of network connections used in computer networking.
+
+Private IP Connection:
+A private IP connection is used within a local network or an organization's internal network. Private IP addresses are not directly accessible from the internet and are reserved for internal use only. They are typically used for devices such as computers, printers, or servers within a local area network (LAN). Private IP addresses follow specific ranges defined by the Internet Assigned Numbers Authority (IANA) and include the following ranges:
+10.0.0.0 to 10.255.255.255 (10.0.0.0/8)
+172.16.0.0 to 172.31.255.255 (172.16.0.0/12)
+192.168.0.0 to 192.168.255.255 (192.168.0.0/16)
+Private IP connections are commonly used to establish communication between devices within a network, enabling sharing of resources and internal services.
+
+Public IP Connection:
+A public IP connection refers to an internet-facing IP address assigned to a device or network. Public IP addresses are globally unique and can be accessed from the internet. These addresses are provided by internet service providers (ISPs) and allow devices to communicate with other devices or services over the internet. Public IP addresses are necessary for devices or services that need to be accessible from outside the local network.
+Public IP connections are used for various purposes, such as accessing websites, running servers, hosting applications, or establishing remote connections to devices over the internet. Public IP addresses are limited, and their allocation is managed by regional internet registries.
+
+In summary, private IP connections are used for internal network communication within a local network, while public IP connections enable devices to communicate over the internet and be accessible from outside networks.
