@@ -50,14 +50,16 @@ rtsp://127.0.0.1:8554/live
 
 
 
-rb5 drone camera 
-in monitor: gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! queue ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 bitrate=2000 ! video/x-h264, profile=baseline ! h264parse ! matroskamux ! tcpserversink host=0.0.0.0 port=8900
+# rb5 drone camera 
+# in monitor: 
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! queue ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 bitrate=2000 ! video/x-h264, profile=baseline ! h264parse ! matroskamux ! tcpserversink host=0.0.0.0 port=8900
 
-pc: adb forward tcp:8900 tcp:8900
+# pc: 
+adb forward tcp:8900 tcp:8900
 adb root
 
-
-vlc: tcp://192.168.0.3:8900
+# vlc: 
+tcp://192.168.0.3:8900
 
 
 
