@@ -47,8 +47,7 @@ rtsp://127.0.0.1:8554/live
 
               # drone camera streaming
 # rb5 drone camera 
-# in a monitor: 
-
+# in a monitor: (output is 50 seconds delay and video stopping and lags)
 gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! queue ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 bitrate=2000 ! video/x-h264, profile=baseline ! h264parse ! matroskamux ! tcpserversink host=0.0.0.0 port=8900
 # The pipeline takes the RTSP stream as input, decodes it, performs object detection using YOLOv5, encodes it with x264, and finally serves the processed video over TCP using the Matroska container format.
 
@@ -64,7 +63,6 @@ gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! vid
 # matroskamux: This element is responsible for multiplexing the parsed H.264 video stream into the Matroska container format.
 # tcpserversink host=0.0.0.0 port=8900: The tcpserversink element sets up a TCP server that listens on all network interfaces (0.0.0.0) and the specified port (8900). It serves the processed video stream over TCP to any connected client.
 
-
 # pc: 
 adb forward tcp:8900 tcp:8900
 adb root
@@ -73,3 +71,21 @@ adb root
 tcp://192.168.0.3:8900
 
 
+# 2nd method - output video stopping and laggings are fixed and 20-30 delays
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live latency=0 ! decodebin ! videoconvert ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0xFF0000FF ! videoconvert ! queue max-size-buffers=1 max-size-bytes=0 max-size-time=0 ! x264enc tune=zerolatency bitrate=750 speed-preset=superfast key-int-max=30 ! video/x-h264, profile=baseline ! h264parse config-interval=-1 ! mpegtsmux ! udpsink host=192.168.0.61 port=8900 sync=true enable-last-sample=false
+# rtsp://223.171.57.239:554/live - source drone camera ip address , 192.168.0.61 - ip of pc receiving stream with vlc
+# Overall, this GStreamer pipeline fetches an RTSP video stream, decodes it, performs object detection using YOLOv5 with AIMET, overlays bounding boxes, encodes the processed video stream using x264, and sends it over UDP to a specified destination.
+
+# queue max-size-buffers=1 max-size-bytes=0 max-size-time=0: This element adds a queue to limit the pipeline's buffering. It sets the maximum size of the queue to 1 buffer, which means it will hold at most one frame in memory.
+# x264enc tune=zerolatency bitrate=750 speed-preset=superfast key-int-max=30: This element encodes the video stream using the x264 encoder with specific settings. The tune=zerolatency option optimizes the encoding for low latency, bitrate=750 sets the target bitrate to 750 kbps, speed-preset=superfast selects the encoding speed preset, and key-int-max=30 specifies the maximum number of frames between keyframes.
+# video/x-h264, profile=baseline: This sets the output format of the encoded video stream to H.264 with the baseline profile.
+# h264parse config-interval=-1: This element inserts SPS (Sequence Parameter Set) and PPS (Picture Parameter Set) headers into the H.264 stream. The config-interval=-1 option indicates that these headers should be inserted whenever necessary.
+# mpegtsmux: This element muxes the encoded video stream into an MPEG-TS (Transport Stream) container.
+# udpsink host=192.168.0.61 port=8900 sync=true enable-last-sample=false: This element sends the MPEG-TS stream over UDP to a specific host and port. The host parameter specifies the destination IP address, and port specifies the destination port number. The sync=true option enables synchronization, and enable-last-sample=false indicates that the last sample should not be sent
+
+#in pc cmd:
+adb forward tcp:8900 tcp:8900
+adb root
+
+VLC link:
+udp://@:8900.
