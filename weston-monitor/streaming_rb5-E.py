@@ -39,3 +39,7 @@ gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! vid
 
 # rtspsrc location=rtsp://223.171.57.239:554/live: This is a GStreamer element used to receive video data from an RTSP (Real-Time Streaming Protocol) source. It specifies the location of the RTSP stream to be captured. In this case, the RTSP stream is located at rtsp://223.171.57.239:554/live.
 
+
+
+
+
