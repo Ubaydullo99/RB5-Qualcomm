@@ -88,4 +88,7 @@ adb forward tcp:8900 tcp:8900
 adb root
 
 VLC link:
-udp://@:8900.
+udp://@:8900
+
+# Reference 
+http://jhub.argosdyne.com/cb/wiki/222550
