@@ -1,0 +1,34 @@
+1)gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! queue ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 bitrate=2000 ! video/x-h264, profile=baseline ! h264parse ! tee name=t ! queue ! matroskamux name=mux ! tcpserversink host=0.0.0.0 port=8900 sync=false t. ! queue ! fakesink silent=true
+
+
+2) 
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! queue max-size-time=0 max-size-buffers=0 max-size-bytes=0 ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! videoconvert ! videorate ! "video/x-raw, framerate=30/1" ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 bitrate=2000 ! video/x-h264, profile=baseline ! h264parse ! tee name=t ! queue ! matroskamux name=mux ! tcpserversink host=0.0.0.0 port=8900 sync=false t. ! queue ! fakesink silent=true
+
+
+issue slow and repeat
+
+
+
+
+
+
+
+
+
+4-1)
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live latency=50 ! decodebin ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0x00FFFFFF ! omxh264enc periodicity-idr=1 interval-intraframes=4 target-bitrate=500000 control-rate=2 ! video/x-h264, profile=baseline ! h264parse ! matroskamux ! tcpserversink host=0.0.0.0 port=8900 sync=false
+
+4-2)
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0xFF0000FF ! videoconvert ! queue ! x264enc tune=zerolatency byte-stream=true bitrate=5000 ! mpegtsmux ! udpsink host=192.168.0.100 port=5000
+
+
+4-3)
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live latency=0 ! decodebin ! videoconvert ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0xFF0000FF ! videoconvert ! queue ! omxh264enc periodicity-idr=1 interval-intraframes=4 target-bitrate=750000 control-rate=1 ! h264parse config-interval=-1 ! mpegtsmux alignment=7 ! udpsink host=192.168.0.61 port=8900 sync=true enable-last-sample=false
+
+4-4) 
+gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live latency=0 ! decodebin ! videoconvert ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0xFF0000FF ! videoconvert ! queue ! x264enc tune=zerolatency bitrate=750 speed-preset=superfast key-int-max=30 ! video/x-h264, profile=baseline ! h264parse config-interval=-1 ! mpegtsmux ! udpsink host=192.168.0.61 port=8900 sync=true enable-last-sample=false
+
+
+4-5)
+
+
