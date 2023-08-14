@@ -71,3 +71,47 @@ Process the detection results from the model, extract bounding box coordinates, 
 - Please refer to the Renesas RB5 documentation and resources for detailed guidance on model conversion, deployment, camera setup, and inference. It's important to follow the instructions provided by Renesas for deploying and utilizing deep learning models on their RB5 platform.
 
 - Keep in mind that working with hardware-specific platforms like the Renesas RB5 may require some familiarity with the platform's tools, libraries, and configuration settings. If you encounter any challenges or need specific technical guidance, reaching out to Renesas support or community forums can be helpful.
+
+
+
+
+
+
+  # Part 3
+
+Certainly, I'll guide you through the process of converting the YOLOv5 model (yolov5s.pt) to DLC format using the provided commands. Here's how you can do it step by step:
+
+ Convert YOLOv5 Model to ONNX Format:
+
+- Navigate to the yolov5 directory and run the following command to convert the YOLOv5 PyTorch model to ONNX format:
+
+bash
+
+    python export.py --weights weights/yolov5s.pt --img-size 640 --dynamic --include pb
+
+Explanation of the command options:
+
+  --weights weights/yolov5s.pt: Path to the YOLOv5 model weights (yolov5s.pt).
+    --img-size 640: Desired input image size for the model.
+    --dynamic: Enable dynamic ONNX export (recommended for YOLO models).
+    --include pb: Include PB module wrapper in the exported ONNX.
+
+This command will generate an ONNX file named yolov5s.onnx in the weights directory.
+
+Convert ONNX Model to DLC Format:
+
+After obtaining the ONNX model, you can proceed to convert it to the DLC format using the SNPE Model Compiler. Please note that you'll need to have the SNPE toolkit installed and properly configured for this step.
+
+Run the following command to convert the ONNX model to DLC:
+
+
+    snpe-onnx-to-dlc --input weights/yolov5s.onnx --output weights/yolov5s.dlc     
+- Explanation of the command options:
+        --input weights/yolov5s.onnx: Path to the input ONNX model file.
+        --output weights/yolov5s.dlc: Path to the output DLC model file.
+
+    This command will generate a DLC file named yolov5s.dlc in the weights directory.
+
+After completing these steps, you will have the YOLOv5 model converted to DLC format, which is compatible with the Renesas RB5 device. You can then proceed to deploy the DLC model on the RB5 device and perform crack detection using the device's camera input.
+
+Please ensure that you have the necessary tools and dependencies installed for both the ONNX export and SNPE Model Compiler steps. Additionally, refer to the documentation and resources for the Renesas RB5 device for any specific instructions or considerations related to deploying DLC models on the device.
