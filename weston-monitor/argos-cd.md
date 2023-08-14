@@ -115,3 +115,16 @@ Run the following command to convert the ONNX model to DLC:
 After completing these steps, you will have the YOLOv5 model converted to DLC format, which is compatible with the Renesas RB5 device. You can then proceed to deploy the DLC model on the RB5 device and perform crack detection using the device's camera input.
 
 Please ensure that you have the necessary tools and dependencies installed for both the ONNX export and SNPE Model Compiler steps. Additionally, refer to the documentation and resources for the Renesas RB5 device for any specific instructions or considerations related to deploying DLC models on the device.
+
+
+## Here's the recommended workflow:
+
+  - Labeling: Annotate your dataset with bounding boxes around cracks. This is typically done using annotation tools like LabelImg, VGG Image Annotator (VIA), or other similar tools. The annotations should include information about the class of the object (in this case, "crack") and the coordinates of the bounding box.
+
+    - Training: Train the YOLOv5 model using the annotated dataset. During training, the model learns to detect the objects based on the annotated bounding box information. The model will learn to identify cracks as well as other classes in your dataset.
+
+    - Export to ONNX: Once the model is trained and performs well, you can export it to the ONNX format using the export.py script as you previously mentioned.
+
+    - Convert to DLC: After exporting to ONNX, you can proceed to convert the ONNX model to DLC (Deep Learning Container) format using the SNPE Model Compiler. This step allows you to optimize the model for deployment on your target device.
+
+    - Deployment: Deploy the DLC model to your target device (e.g., RB5 platform) and use it for crack detection on real-time camera input.
