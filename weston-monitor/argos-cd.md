@@ -1,14 +1,13 @@
 Certainly! Here's a more detailed guide on how to integrate the YOLOv5 crack detection model into your GStreamer pipeline on a Qualcomm RB5 device running Ubuntu 18.04. We'll also set up a Python virtual environment for the necessary codes:
 
-    Install YOLOv5 on Qualcomm RB5:
+Install YOLOv5 on Qualcomm RB5:
 
-    Follow the YOLOv5 installation instructions for Ubuntu from the official repository: https://github.com/ultralytics/yolov5#install
+Follow the YOLOv5 installation instructions for Ubuntu from the official repository: https://github.com/ultralytics/yolov5#install
 
-    bash
 
-git clone https://github.com/ultralytics/yolov5.git
-cd yolov5
-pip install -U -r requirements.txt
+    git clone https://github.com/ultralytics/yolov5.git
+    cd yolov5
+    pip install -U -r requirements.txt
 
 Convert YOLOv5 Model to DLC Format:
 
@@ -18,27 +17,22 @@ Set Up Python Virtual Environment:
 
 On your RB5 device, create a Python virtual environment to manage your code and dependencies.
 
-bash
-
-sudo apt-get install python3-venv
-python3 -m venv rb5_env
-source rb5_env/bin/activate
+    sudo apt-get install python3-venv
+    python3 -m venv rb5_env
+    source rb5_env/bin/activate
 
 Update GStreamer Pipeline:
 
 Modify your GStreamer pipeline to integrate the crack detection model. Replace the qtiqmmfsrc element with the appropriate AI inference element. You might use qtiml, qtiavb, or other relevant elements depending on your device configuration.
 
-bash
 
-gst-launch-1.0 qtiqmmfsrc ! video/x-raw(memory:GBM), format=NV12, width=1280, height=720, framerate=30/1 ! qtiml model=path/to/your/model.dlc ! ...
+    gst-launch-1.0 qtiqmmfsrc ! video/x-raw(memory:GBM), format=NV12, width=1280, height=720, framerate=30/1 ! qtiml model=path/to/your/model.dlc ! ...
 
 Integrate Crack Detection Output:
 
 Process the output of the AI inference to overlay the crack detection results on the video frames using GStreamer's video processing elements.
 
-bash
-
-... ! qtiml ! videoconvert ! videobox border-alpha=0 left=-1920 top=-1080 ! waylandsink
+    ... ! qtiml ! videoconvert ! videobox border-alpha=0 left=-1920 top=-1080 ! waylandsink
 
 Testing and Optimization:
 
@@ -47,8 +41,6 @@ Run your GStreamer pipeline and monitor the crack detection output. Adjust param
 Deactivate Python Virtual Environment:
 
 When you're done working, deactivate the Python virtual environment.
-
-bash
 
     deactivate
 
