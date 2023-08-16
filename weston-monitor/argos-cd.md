@@ -161,4 +161,11 @@ Here are the general steps to use YOLOv5 for crack detection using the provided 
 #### accessing python3.9 in rb5
     cd python39/Python-3.9.7/argos9
     source bin/activate
+
+#### yolo using code 
+    python detect.py --weights weights/yolov5s.pt --img-size 640 --conf 0.4 --source data/images/zidane.jpg
+
+
+    python export.py --weights weights/yolov5s.pt --img-size 640 --dynamic --include onnx
+
     
