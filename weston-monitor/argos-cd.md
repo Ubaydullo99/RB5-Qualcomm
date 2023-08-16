@@ -155,3 +155,10 @@ Here are the general steps to use YOLOv5 for crack detection using the provided 
 
 - Integration with Camera Stream:
     Now, let's integrate the YOLOv5 crack detection with the provided camera stream. It seems like you are using gst-launch-1.0 for video streaming. You need to modify this pipeline to include YOLOv5 inference. This might involve writing a Python script that reads frames from the camera stream, performs crack detection using the trained model, and then displays the results.
+
+
+
+#### accessing python3.9 in rb5
+    cd python39/Python-3.9.7/argos9
+    source bin/activate
+    
