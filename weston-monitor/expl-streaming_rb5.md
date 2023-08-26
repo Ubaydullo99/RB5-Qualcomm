@@ -1,7 +1,7 @@
 # RB5 weston terminal:
 
 - in monitor: from z90x drone camera 
-    gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0xFF0000FF ! videoconvert ! waylandsink width=1920 height=1080 async=true sync=false enable-last-sample=false
+        gst-launch-1.0 rtspsrc location=rtsp://223.171.57.239:554/live ! decodebin ! videoconvert ! qtimlesnpe config=/data/misc/camera/yolo/mle_snpeyolov5m_quant_hta.config postprocessing=yolov5detection ! qtioverlay bbox-color=0xFF0000FF ! videoconvert ! waylandsink width=1920 height=1080 async=true sync=false enable-last-sample=false
 # When you run this command, GStreamer constructs a pipeline with the specified elements and configurations. It captures video frames from the QMMF source, applies a neural network inference using the SNPE plugin, performs post-processing for object detection, adds bounding box overlays, and displays the processed video on the screen using Wayland.
 
 # gst-launch-1.0: This command launches the GStreamer command-line tool, version 1.0, which is a framework for constructing multimedia pipelines in Unix-like systems.
