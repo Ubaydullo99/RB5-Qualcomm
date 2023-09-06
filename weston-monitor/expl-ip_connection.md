@@ -1,4 +1,9 @@
 # VLC access (video, rb5 camera streaming, drone camera streaming)
+
+### RB5 camera stream
+    gst-launch-1.0 qtiqmmfsrc ! video/x-raw\(memory:GBM\), format=NV12, width=1280, height=720, framerate=30/1 ! queue ! waylandsink  width=1920 height=1080 async=true sync=false enable-last-sample=false
+
+
            
 ## rb5 video file: 
 ### in a monitor: 
